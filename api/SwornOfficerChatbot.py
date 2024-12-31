@@ -12,6 +12,10 @@ pc = Pinecone(api_key=os.getenv('PINECONE_API_KEY'))
 index = pc.Index("swornvideorecommendationsystem")
 
 
+if not os.getenv('OPENAI_API_KEY') or not os.getenv('PINECONE_API_KEY'):
+    raise ValueError("Missing required environment variables. Please check OPENAI_API_KEY and PINECONE_API_KEY")
+
+
 class ContentChatbot:
     def __init__(self):
         self.conversation_history = []
