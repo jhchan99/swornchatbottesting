@@ -19,7 +19,7 @@ class ContentChatbot:
     def generate_embedding(self, text):
         """Generate embedding for search query"""
         response = client.embeddings.create(
-            model="text-embedding-ada-002",
+            model="text-embedding-3-small",
             input=text
         )
         return response.data[0].embedding
