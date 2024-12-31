@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from api.SwornOfficerChatbot import ContentChatbot
 
 app = Flask(__name__)
