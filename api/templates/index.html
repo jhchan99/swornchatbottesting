@@ -6,25 +6,25 @@
     <title>Content Chatbot</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script>
 </head>
-<body class="bg-gray-100 min-h-screen">
-    <div class="container mx-auto px-4 py-8 max-w-3xl">
-        <div class="bg-white rounded-lg shadow-lg p-6">
-            <h1 class="text-2xl font-bold mb-6 text-gray-800">Content Assistant</h1>
+<body class="bg-gray-50 min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <div class="bg-white rounded-xl shadow-lg p-6">
+            <h1 class="text-3xl font-bold mb-8 text-gray-800 text-center">Content Assistant</h1>
 
-            <div id="chat-container" class="space-y-4 mb-6 h-96 overflow-y-auto">
+            <div id="chat-container" class="space-y-6 mb-8 h-[500px] overflow-y-auto px-4">
                 <!-- Messages will be inserted here -->
             </div>
 
-            <div class="flex space-x-2">
+            <div class="flex space-x-3 p-4 bg-gray-50 rounded-lg">
                 <input
                     type="text"
                     id="user-input"
-                    class="flex-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    class="flex-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-700"
                     placeholder="Type your message here..."
                 >
                 <button
                     id="send-button"
-                    class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    class="bg-blue-500 text-white px-8 py-3 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 font-medium transition-colors"
                 >
                     Send
                 </button>
@@ -39,8 +39,14 @@
 
         function addMessage(content, isUser) {
             const messageDiv = document.createElement('div');
-            messageDiv.className = `p-3 rounded-lg ${isUser ? 'bg-blue-100 ml-auto' : 'bg-gray-100'} max-w-[80%]`;
-            messageDiv.textContent = content;
+            messageDiv.className = `p-4 rounded-lg ${isUser ? 'bg-blue-100 ml-auto' : 'bg-gray-100'} max-w-[85%] whitespace-pre-wrap`;
+
+            // Style the text
+            const text = document.createElement('p');
+            text.className = 'text-gray-800 leading-relaxed';
+            text.textContent = content;
+
+            messageDiv.appendChild(text);
             chatContainer.appendChild(messageDiv);
             chatContainer.scrollTop = chatContainer.scrollHeight;
         }
