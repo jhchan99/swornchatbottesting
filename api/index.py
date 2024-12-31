@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from SwornOfficerChatbot import ContentChatbot
+from api.SwornOfficerChatbot import ContentChatbot
 
 app = Flask(__name__)
 chatbot = ContentChatbot()
