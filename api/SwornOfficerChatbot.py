@@ -88,7 +88,12 @@ class ContentChatbot:
         if not context:
             context.append("No relevant content found in the knowledge base.")
 
-        return "\n".join(context)
+        formatted_context = "\n".join(context)
+        print("\nFormatted Context:")
+        print("=" * 50)
+        print(formatted_context)
+        print("=" * 50)
+        return formatted_context
 
     def generate_response(self, user_query, context):
         """Generate a response using the OpenAI API"""
@@ -107,6 +112,15 @@ class ContentChatbot:
             # Add conversation history for context
             messages.extend(self.conversation_history)
 
+            print("Sending request to OpenAI...")  # Debug print
+            response = client.chat.completions.create(
+                model="gpt-4o-mini",  # Keeping your model name as is
+                messages=messages,
+                temperature=0.7,
+                max_tokens=500
+            )
+            print("Received response from OpenAI")  # Debug print
+
             # Generate response
             response = client.chat.completions.create(
                 model="gpt-4o-mini",
@@ -123,13 +137,13 @@ class ContentChatbot:
     def chat(self, user_input):
         """Main chat function that processes user input and returns a response"""
         try:
-            # Search for relevant content
+            print("Starting content search...")  # Debug print
             video_results, content_results = self.search_content(user_input)
 
-            # Format the context from search results
+            print("Formatting context...")  # Debug print
             context = self.format_context(video_results, content_results)
 
-            # Generate response
+            print("Generating response...")  # Debug print
             response = self.generate_response(user_input, context)
 
             # Update conversation history (keep last 6 messages)
@@ -140,8 +154,12 @@ class ContentChatbot:
 
             return response
 
+
         except Exception as e:
-            return "I apologize, but I encountered an error. Please try asking your question again."
+
+            print(f"Error in chat method: {type(e).__name__}, {str(e)}")  # Detailed error info
+
+            return f"I apologize, but I encountered an error: {type(e).__name__} - {str(e)}"
 
 
 def main():
