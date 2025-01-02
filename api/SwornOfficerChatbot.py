@@ -100,7 +100,8 @@ class ContentChatbot:
         try:
             # Construct the prompt
             messages = [
-                {"role": "system", "content": """You are a helpful assistant with access to a knowledge base of educational content and video transcripts. 
+                {"role": "system", "content": """You are a helpful assistant with access to a knowledge base of educational
+                 content and video transcript, curated specifically to help on duty police officers manage their health.
                  Use the provided context to answer questions accurately. Be conversational but precise.
                  When you reference information, mention if it comes from educational content or video material.
                  If the context doesn't contain relevant information, be honest about it and provide general guidance."""},
@@ -114,20 +115,12 @@ class ContentChatbot:
 
             print("Sending request to OpenAI...")  # Debug print
             response = client.chat.completions.create(
-                model="gpt-4o-mini",  # Keeping your model name as is
-                messages=messages,
-                temperature=0.7,
-                max_tokens=500
-            )
-            print("Received response from OpenAI")  # Debug print
-
-            # Generate response
-            response = client.chat.completions.create(
                 model="gpt-4o-mini",
                 messages=messages,
                 temperature=0.7,
                 max_tokens=500
             )
+            print("Received response from OpenAI")  # Debug print
 
             return response.choices[0].message.content
 
