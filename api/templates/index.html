@@ -225,7 +225,8 @@
                 addMessage(data.error || data.response);
             } catch (error) {
                 removeTypingIndicator();
-                addMessage('Sorry, there was an error connecting to the server.');
+                addMessage('Sorry, there was an error connecting to the server.')
+                addMessage(error); /*remove this later*/
             }
 
             userInput.disabled = false;
